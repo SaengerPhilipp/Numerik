@@ -2,9 +2,24 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import timeit
+import random
 
-x = [-2*math.pi, -math.pi, -(1/2)*math.pi, 0, (1/2)*math.pi, math.pi, 2*math.pi]
-f = [0,0,-1,0,1,0,0]
+def randomX(a,b,num):
+    numbers = set()
+    while len(numbers) < num:
+        sample = random.betavariate(0.5,0.5)
+        numbers.add(a+sample*(b-a))
+    return list(numbers)
+
+def f_fromRandomX(numbers, func):
+    return [func(x) for x in numbers]
+
+#Test:
+#x = [-2*math.pi, -math.pi, -(1/2)*math.pi, 0, (1/2)*math.pi, math.pi, 2*math.pi]
+#f = [0,0,-1,0,1,0,0]
+
+x = randomX(-20,20,100)
+f = f_fromRandomX(x, lambda y: math.exp(y))
 
 def weigths(x):
     lamda = []
@@ -26,10 +41,10 @@ def interpolationsPolynom(x,f):
 duration = timeit.timeit(lambda: interpolationsPolynom(x,f), number=1000)
 print(duration)
 
-trueFunction = lambda y: math.sin(y)
+trueFunction = lambda y: math.exp(y)
 p = interpolationsPolynom(x,f)
 
-x_values = np.linspace(-7, 7, 200)
+x_values = np.linspace(-20, 20, 400)
 
 # 3. Y-Werte berechnen (Vektorisierung per Listen-Abstraktion)
 y_prod = [trueFunction(x) for x in x_values]
@@ -42,7 +57,7 @@ plt.plot(x_values, y_prod, label="sin$", color="blue", linewidth=2)
 plt.plot(x_values, y_sum, label="p", color="red", linestyle="--")
 
 # Nullstellen von y markieren
-
+plt.ylim(-3,3)
 plt.axhline(0, color='black', linewidth=0.5)
 plt.xlabel("x")
 plt.ylabel("f(x)")
