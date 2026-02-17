@@ -2,24 +2,14 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import timeit
-import random
-
-def randomX(a,b,num):
-    numbers = set()
-    while len(numbers) < num:
-        sample = random.betavariate(0.5,0.5)
-        numbers.add(a+sample*(b-a))
-    return list(numbers)
-
-def f_fromRandomX(numbers, func):
-    return [func(x) for x in numbers]
+import Knoten
 
 #Test:
 #x = [-2*math.pi, -math.pi, -(1/2)*math.pi, 0, (1/2)*math.pi, math.pi, 2*math.pi]
 #f = [0,0,-1,0,1,0,0]
 
-x = randomX(-20,20,100)
-f = f_fromRandomX(x, lambda y: math.exp(y))
+x = Knoten.chebyshevX(-20,20,100)
+f = Knoten.f_fromRandomX(x, lambda y: math.exp(y))
 
 def weigths(x):
     lamda = []
