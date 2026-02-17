@@ -24,3 +24,6 @@ def chebyshevX(a, b, num):
         scaled = 0.5 * (a + b) + 0.5 * (b - a) * number
         numbers.append(scaled)
     return numbers
+
+def äquidistantesX(a,b,num):
+    return [a + i* ((b-a)/num) for i in range(1,num+1)]
