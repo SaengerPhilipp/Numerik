@@ -8,7 +8,7 @@ import Knoten
 #x = [-2*math.pi, -math.pi, -(1/2)*math.pi, 0, (1/2)*math.pi, math.pi, 2*math.pi]
 #f = [0,0,-1,0,1,0,0]
 
-x = Knoten.äquidistantesX(-20,20,100)
+x = Knoten.chebyshevX(-20,20,50)
 f = Knoten.f_fromRandomX(x, lambda y: math.exp(y))
 
 def weigths(x):
